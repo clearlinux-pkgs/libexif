@@ -4,7 +4,7 @@
 #
 Name     : libexif
 Version  : 0.6.21
-Release  : 2
+Release  : 3
 URL      : http://downloads.sourceforge.net/project/libexif/libexif/0.6.21/libexif-0.6.21.tar.bz2
 Source0  : http://downloads.sourceforge.net/project/libexif/libexif/0.6.21/libexif-0.6.21.tar.bz2
 Summary  : EXIF tag library
@@ -13,6 +13,7 @@ License  : LGPL-2.1
 Requires: libexif-lib
 Requires: libexif-doc
 Requires: libexif-locales
+Patch1: cve-2017-7544.patch
 
 %description
 libexif is a library for parsing, editing, and saving EXIF data. It is
@@ -55,9 +56,18 @@ locales components for the libexif package.
 
 %prep
 %setup -q -n libexif-0.6.21
+%patch1 -p1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
+export SOURCE_DATE_EPOCH=1507235289
+export CFLAGS="$CFLAGS -fstack-protector-strong "
+export FCFLAGS="$CFLAGS -fstack-protector-strong "
+export FFLAGS="$CFLAGS -fstack-protector-strong "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -65,10 +75,11 @@ make V=1  %{?_smp_mflags}
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
+export SOURCE_DATE_EPOCH=1507235289
 rm -rf %{buildroot}
 %make_install
 %find_lang libexif-12
@@ -92,8 +103,8 @@ rm -rf %{buildroot}
 /usr/include/libexif/exif-mnote-data.h
 /usr/include/libexif/exif-tag.h
 /usr/include/libexif/exif-utils.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libexif.so
+/usr/lib64/pkgconfig/libexif.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -101,8 +112,9 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libexif.so.12
+/usr/lib64/libexif.so.12.3.3
 
-%files locales -f libexif-12.lang 
+%files locales -f libexif-12.lang
 %defattr(-,root,root,-)
 
