@@ -4,16 +4,17 @@
 #
 Name     : libexif
 Version  : 0.6.21
-Release  : 5
+Release  : 6
 URL      : http://downloads.sourceforge.net/project/libexif/libexif/0.6.21/libexif-0.6.21.tar.bz2
 Source0  : http://downloads.sourceforge.net/project/libexif/libexif/0.6.21/libexif-0.6.21.tar.bz2
 Summary  : EXIF tag library
 Group    : Development/Tools
 License  : LGPL-2.1
-Requires: libexif-lib
-Requires: libexif-doc
-Requires: libexif-locales
+Requires: libexif-lib = %{version}-%{release}
+Requires: libexif-license = %{version}-%{release}
+Requires: libexif-locales = %{version}-%{release}
 Patch1: cve-2017-7544.patch
+Patch2: CVE-2016-6328.patch
 
 %description
 libexif is a library for parsing, editing, and saving EXIF data. It is
@@ -23,8 +24,8 @@ utilities and programs with GUIs.
 %package dev
 Summary: dev components for the libexif package.
 Group: Development
-Requires: libexif-lib
-Provides: libexif-devel
+Requires: libexif-lib = %{version}-%{release}
+Provides: libexif-devel = %{version}-%{release}
 
 %description dev
 dev components for the libexif package.
@@ -41,9 +42,18 @@ doc components for the libexif package.
 %package lib
 Summary: lib components for the libexif package.
 Group: Libraries
+Requires: libexif-license = %{version}-%{release}
 
 %description lib
 lib components for the libexif package.
+
+
+%package license
+Summary: license components for the libexif package.
+Group: Default
+
+%description license
+license components for the libexif package.
 
 
 %package locales
@@ -57,19 +67,20 @@ locales components for the libexif package.
 %prep
 %setup -q -n libexif-0.6.21
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507235289
-export CFLAGS="$CFLAGS -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -fstack-protector-strong "
-export FFLAGS="$CFLAGS -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
+export SOURCE_DATE_EPOCH=1544115832
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -79,8 +90,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1507235289
+export SOURCE_DATE_EPOCH=1544115832
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/libexif
+cp COPYING %{buildroot}/usr/share/package-licenses/libexif/COPYING
 %make_install
 %find_lang libexif-12
 
@@ -107,13 +120,17 @@ rm -rf %{buildroot}
 /usr/lib64/pkgconfig/libexif.pc
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/doc/libexif/*
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libexif.so.12
 /usr/lib64/libexif.so.12.3.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libexif/COPYING
 
 %files locales -f libexif-12.lang
 %defattr(-,root,root,-)
