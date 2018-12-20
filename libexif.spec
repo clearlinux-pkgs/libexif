@@ -4,9 +4,9 @@
 #
 Name     : libexif
 Version  : 0.6.21
-Release  : 6
-URL      : http://downloads.sourceforge.net/project/libexif/libexif/0.6.21/libexif-0.6.21.tar.bz2
-Source0  : http://downloads.sourceforge.net/project/libexif/libexif/0.6.21/libexif-0.6.21.tar.bz2
+Release  : 7
+URL      : https://sourceforge.net/projects/libexif/files/libexif/0.6.21/libexif-0.6.21.tar.bz2
+Source0  : https://sourceforge.net/projects/libexif/files/libexif/0.6.21/libexif-0.6.21.tar.bz2
 Summary  : EXIF tag library
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -74,7 +74,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1544115832
+export SOURCE_DATE_EPOCH=1545264674
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -90,7 +90,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1544115832
+export SOURCE_DATE_EPOCH=1545264674
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libexif
 cp COPYING %{buildroot}/usr/share/package-licenses/libexif/COPYING
