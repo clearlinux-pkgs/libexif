@@ -4,10 +4,10 @@
 #
 Name     : libexif
 Version  : 0.6.21
-Release  : 7
-URL      : https://sourceforge.net/projects/libexif/files/libexif/0.6.21/libexif-0.6.21.tar.bz2
-Source0  : https://sourceforge.net/projects/libexif/files/libexif/0.6.21/libexif-0.6.21.tar.bz2
-Summary  : EXIF tag library
+Release  : 8
+URL      : https://github.com/libexif/libexif/archive/libexif-0_6_21-release.tar.gz
+Source0  : https://github.com/libexif/libexif/archive/libexif-0_6_21-release.tar.gz
+Summary  : Library for easy access to EXIF data
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: libexif-lib = %{version}-%{release}
@@ -15,8 +15,13 @@ Requires: libexif-license = %{version}-%{release}
 Requires: libexif-locales = %{version}-%{release}
 Patch1: cve-2017-7544.patch
 Patch2: CVE-2016-6328.patch
+Patch3: CVE-2018-20030.patch
 
 %description
+libexif
+-------
+DESCRIPTION
+-----------
 libexif is a library for parsing, editing, and saving EXIF data. It is
 intended to replace lots of redundant implementations in command-line
 utilities and programs with GUIs.
@@ -65,21 +70,22 @@ locales components for the libexif package.
 
 
 %prep
-%setup -q -n libexif-0.6.21
+%setup -q -n libexif-libexif-0_6_21-release
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545264674
+export SOURCE_DATE_EPOCH=1550269715
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-%configure --disable-static
+%reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %check
@@ -90,7 +96,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1545264674
+export SOURCE_DATE_EPOCH=1550269715
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libexif
 cp COPYING %{buildroot}/usr/share/package-licenses/libexif/COPYING
