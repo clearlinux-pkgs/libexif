@@ -4,7 +4,7 @@
 #
 Name     : libexif
 Version  : 0.6.21
-Release  : 8
+Release  : 9
 URL      : https://github.com/libexif/libexif/archive/libexif-0_6_21-release.tar.gz
 Source0  : https://github.com/libexif/libexif/archive/libexif-0_6_21-release.tar.gz
 Summary  : Library for easy access to EXIF data
