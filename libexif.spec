@@ -4,13 +4,12 @@
 #
 Name     : libexif
 Version  : 0.6.24
-Release  : 15
+Release  : 16
 URL      : https://github.com/libexif/libexif/archive/libexif-0_6_24-release/libexif-0.6.24.tar.gz
 Source0  : https://github.com/libexif/libexif/archive/libexif-0_6_24-release/libexif-0.6.24.tar.gz
 Summary  : Library for easy access to EXIF data
 Group    : Development/Tools
 License  : LGPL-2.1
-Requires: libexif-filemap = %{version}-%{release}
 Requires: libexif-lib = %{version}-%{release}
 Requires: libexif-license = %{version}-%{release}
 Requires: libexif-locales = %{version}-%{release}
@@ -43,19 +42,10 @@ Group: Documentation
 doc components for the libexif package.
 
 
-%package filemap
-Summary: filemap components for the libexif package.
-Group: Default
-
-%description filemap
-filemap components for the libexif package.
-
-
 %package lib
 Summary: lib components for the libexif package.
 Group: Libraries
 Requires: libexif-license = %{version}-%{release}
-Requires: libexif-filemap = %{version}-%{release}
 
 %description lib
 lib components for the libexif package.
@@ -89,7 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638529540
+export SOURCE_DATE_EPOCH=1656046085
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -118,7 +108,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1638529540
+export SOURCE_DATE_EPOCH=1656046085
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libexif
 cp %{_builddir}/libexif-libexif-0_6_24-release/COPYING %{buildroot}/usr/share/package-licenses/libexif/4df5d4b947cf4e63e675729dd3f168ba844483c7
@@ -127,7 +117,7 @@ pushd ../buildavx2/
 popd
 %make_install
 %find_lang libexif-12
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -155,15 +145,13 @@ popd
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/libexif/*
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-libexif
-
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libexif.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libexif.so.12
+/usr/lib64/glibc-hwcaps/x86-64-v3/libexif.so.12.3.4
 /usr/lib64/libexif.so.12
 /usr/lib64/libexif.so.12.3.4
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)

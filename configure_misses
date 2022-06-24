@@ -4,8 +4,8 @@ Configure miss: /lib64/libfailmalloc.so.0
 Configure miss: /lib64/libfailmalloc.so.0
 Configure miss: /usr/lib/libfailmalloc.so.0
 Configure miss: /usr/lib/libfailmalloc.so.0
-Configure miss: /usr/lib64/gcc/x86_64-generic-linux/11/libfailmalloc.so.0
-Configure miss: /usr/lib64/gcc/x86_64-generic-linux/11/libfailmalloc.so.0
+Configure miss: /usr/lib64/gcc/x86_64-generic-linux/12/libfailmalloc.so.0
+Configure miss: /usr/lib64/gcc/x86_64-generic-linux/12/libfailmalloc.so.0
 Configure miss: /usr/lib64/libfailmalloc.so.0
 Configure miss: /usr/lib64/libfailmalloc.so.0
 Configure miss: failmalloc
@@ -14,3 +14,5 @@ Configure miss: localtime_s
 Configure miss: localtime_s
 Configure miss: whether to create internal code docs
 Configure miss: whether to create internal code docs
+Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: x86_64-generic-linux-gnu-file
