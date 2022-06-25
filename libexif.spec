@@ -4,7 +4,7 @@
 #
 Name     : libexif
 Version  : 0.6.24
-Release  : 16
+Release  : 17
 URL      : https://github.com/libexif/libexif/archive/libexif-0_6_24-release/libexif-0.6.24.tar.gz
 Source0  : https://github.com/libexif/libexif/archive/libexif-0_6_24-release/libexif-0.6.24.tar.gz
 Summary  : Library for easy access to EXIF data
@@ -79,7 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656046085
+export SOURCE_DATE_EPOCH=1656129729
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -108,7 +108,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1656046085
+export SOURCE_DATE_EPOCH=1656129729
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libexif
 cp %{_builddir}/libexif-libexif-0_6_24-release/COPYING %{buildroot}/usr/share/package-licenses/libexif/4df5d4b947cf4e63e675729dd3f168ba844483c7
