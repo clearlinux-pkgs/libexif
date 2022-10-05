@@ -4,7 +4,7 @@
 #
 Name     : libexif
 Version  : 0.6.24
-Release  : 21
+Release  : 22
 URL      : https://github.com/libexif/libexif/archive/libexif-0_6_24-release/libexif-0.6.24.tar.gz
 Source0  : https://github.com/libexif/libexif/archive/libexif-0_6_24-release/libexif-0.6.24.tar.gz
 Summary  : Library for easy access to EXIF data
@@ -79,12 +79,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656129729
+export SOURCE_DATE_EPOCH=1664934016
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %reconfigure --disable-static
 make  %{?_smp_mflags}
 unset PKG_CONFIG_PATH
@@ -108,10 +108,10 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1656129729
+export SOURCE_DATE_EPOCH=1664934016
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libexif
-cp %{_builddir}/libexif-libexif-0_6_24-release/COPYING %{buildroot}/usr/share/package-licenses/libexif/4df5d4b947cf4e63e675729dd3f168ba844483c7
+cp %{_builddir}/libexif-libexif-0_6_24-release/COPYING %{buildroot}/usr/share/package-licenses/libexif/4df5d4b947cf4e63e675729dd3f168ba844483c7 || :
 pushd ../buildavx2/
 %make_install_v3
 popd
@@ -138,6 +138,7 @@ popd
 /usr/include/libexif/exif-mnote-data.h
 /usr/include/libexif/exif-tag.h
 /usr/include/libexif/exif-utils.h
+/usr/lib64/glibc-hwcaps/x86-64-v3/libexif.so
 /usr/lib64/libexif.so
 /usr/lib64/pkgconfig/libexif.pc
 
@@ -147,7 +148,6 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/glibc-hwcaps/x86-64-v3/libexif.so
 /usr/lib64/glibc-hwcaps/x86-64-v3/libexif.so.12
 /usr/lib64/glibc-hwcaps/x86-64-v3/libexif.so.12.3.4
 /usr/lib64/libexif.so.12
