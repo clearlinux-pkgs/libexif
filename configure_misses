@@ -4,8 +4,8 @@ Configure miss: /lib64/libfailmalloc.so.0
 Configure miss: /lib64/libfailmalloc.so.0
 Configure miss: /usr/lib/libfailmalloc.so.0
 Configure miss: /usr/lib/libfailmalloc.so.0
-Configure miss: /usr/lib64/gcc/x86_64-generic-linux/12/libfailmalloc.so.0
-Configure miss: /usr/lib64/gcc/x86_64-generic-linux/12/libfailmalloc.so.0
+Configure miss: /usr/lib64/gcc/x86_64-generic-linux/13/libfailmalloc.so.0
+Configure miss: /usr/lib64/gcc/x86_64-generic-linux/13/libfailmalloc.so.0
 Configure miss: /usr/lib64/libfailmalloc.so.0
 Configure miss: /usr/lib64/libfailmalloc.so.0
 Configure miss: failmalloc
